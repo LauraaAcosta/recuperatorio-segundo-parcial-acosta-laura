@@ -3,22 +3,22 @@ import { DataTypes, STRING } from "sequelize";
 
 export const languages = sequelize.define( "Languages",
     {
-        id: {
+/*         id: {
             type:DataTypes.INTEGER(),
             autoIncrement: true,
             primaryKey: true, 
-        },
+        }, */
         name: {
-            type:DataTypes.STRING(),
+            type:DataTypes.STRING,
             allowNull:false,
             unique: true,
         },
         paradigm: {
-            type:DataTypes.STRING(),
+            type:DataTypes.STRING,
             allowNull:false,
         },
         release_date: {
-            type:DataTypes.INTEGER(),
+            type:DataTypes.INTEGER,
             allowNull:true,
         },
     }

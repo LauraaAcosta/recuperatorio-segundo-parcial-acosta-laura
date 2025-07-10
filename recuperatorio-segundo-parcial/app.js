@@ -1,17 +1,20 @@
 import express from "express";
+import lenguagesRouter from "./src/routes/language.routes.js";
 import dotenv from "dotenv"; 
 import { startDb } from "./src/config/database.js";
-import { languagesRouter } from "./src/routes/language.routes.js";
+
 dotenv.config();
-
 const app = express();
-app.use (express.json());
+const PORT = process.env.PORT || 3000;
 
-app.use('/api', languagesRouter);
 
-const port = process.env.PORT || 3000
+app.use(express.json());
 
-app.listen(port.async()=>{
-    console.log(`Servidor corriendo en el puerto ${port}`)
-    await startDb()
-})
+
+app.use("/Languages", lenguagesRouter);
+
+
+app.listen(PORT, async () => {
+    await startDb();
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});

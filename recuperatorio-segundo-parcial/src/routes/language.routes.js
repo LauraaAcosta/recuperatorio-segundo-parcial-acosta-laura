@@ -1,12 +1,13 @@
 import express from "express";
-//import (peticiones)
+import { createLanguages, deleteLanguages, getAllLanguages, getLanguagesId, updateLanguages } from "../controllers/language.controllers.js";
+
 
 export const languagesRouter = express.Router()
 
 
-languagesRouter.get ("/languages",)
-languagesRouter.get ("/languages",)
-languagesRouter.put ("/languages",)
-languagesRouter.post ("/languages",)
-languagesRouter.delete ("/languages",)
+languagesRouter.get ("/languages",getAllLanguages)
+languagesRouter.get ("/languages/:id",getLanguagesId)
+languagesRouter.put ("/languages/:id",updateLanguages)
+languagesRouter.post ("/languages",createLanguages)
+languagesRouter.delete ("/languages/:id",deleteLanguages)
 

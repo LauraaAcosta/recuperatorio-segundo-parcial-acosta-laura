@@ -4,7 +4,7 @@ import { DataTypes } from "sequelize";
 export const languages = sequelize.define( "Languages",
     {
         id: {
-            type:DataTypes.INTEGER,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true, 
             unique: true,
@@ -22,5 +22,8 @@ export const languages = sequelize.define( "Languages",
             type:DataTypes.INTEGER,
             allowNull:true,
         },
+    }, {
+        timestamps: false
     }
 );
+

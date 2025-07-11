@@ -65,18 +65,19 @@ export const deleteLanguages = async(req,res) => {
 export const updateLanguages= async (req, res) =>{
     try {
         const { id } = req.params;
-        const {name, paradigm, release_year} = req.body; 
-        const languages = await languages.findByPk(id);
+        const {name, paradigm, release_year} = req.body
+        const languages = await languages.findByPk(id)
         if(!languages){
-            return res.status(404).json({Message: "No se encuentra el lenguaje"});
+            return res.status(404).json({Message: "No se encuentra el lenguaje"})
         }
         if(name) languages.name = name.trim();
         if(paradigm) languages.paradigm = paradigm.trim();
-        if(release_year || release_year ===0) languages.release_year = release_year;
+        if(release_year || release_year ===0) languages.release_year = release_year
         
         await languages.save();
-        res.status(200).json({Message: "Se actualizó un lenguage exitosamente", languages});
+        res.status(200).json({Message: "Se actualizó un lenguage exitosamente", languages})
     } catch (error) {
-        res.status(500).json({Message: "Error con el servidor"});
+        res.status(500).json({Message: "Error con el servidor"})
+        console.log("Hubo un error con el servidor", error)
     }
 };

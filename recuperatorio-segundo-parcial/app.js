@@ -11,10 +11,11 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 
-app.use("/Languages", lenguagesRouter);
+app.use("api/Languages", lenguagesRouter);
 
 
 app.listen(PORT, async () => {
-    await startDb();
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`Servidor corriendo en ${PORT}`);
 });
+
+startDb();

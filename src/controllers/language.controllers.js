@@ -60,24 +60,24 @@ export const deleteLanguages = async(req,res) => {
         return res.status(500).json({Message:"Error del Servidor"})
     }
 }
-export const updateLanguages = async(req,res) => {
+
+
+export const updateLanguages= async (req, res) =>{
     try {
-        const {id} = req.params
-        const buscarLenguaje = await languages.findOne({where:{id}})
-        if(!buscarLenguaje){
+        const { id } = req.params;
+        const {name, paradigm, release_year} = req.body
+        const languages = await languages.findByPk(id)
+        if(!languages){
             return res.status(404).json({Message: "No se encuentra el lenguaje"})
         }
-                const unicoLenguaje = await languages.findOne({where:{title}})
-        if (unicoLenguaje) {
-            return res.status(400).json ({Message:"El lenguaje ya existe, pruebe otro"})
-        }
-        const upgradeLenguaje = await languages.update ({paradigm,release_year,name})
-        if (!upgradeLenguaje){
-            return res.status(400).json({Message:"No se pudo actualizar"})
-        }
-        return res.status(200).json({Message: "Se actualizó exitosamente", upgradeLenguaje})
+        if(name) languages.name = name.trim();
+        if(paradigm) languages.paradigm = paradigm.trim();
+        if(release_year || release_year ===0) languages.release_year = release_year
+        
+        await languages.save();
+        res.status(200).json({Message: "Se actualizó un lenguage exitosamente", languages})
     } catch (error) {
-        console.log(error)
-        return res.status(500).json({Message:"Error del Servidor"})
+        res.status(500).json({Message: "Error con el servidor"})
+        console.log("Hubo un error con el servidor", error)
     }
-}
+};
